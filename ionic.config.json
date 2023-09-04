@@ -1,0 +1,7 @@
+{
+  "name": "phaserTutorial",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
