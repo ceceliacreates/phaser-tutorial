@@ -11,13 +11,12 @@
           <ion-title size="large">Play</ion-title>
         </ion-toolbar>
       </ion-header>
-
-      <ExploreContainer name="Play page" />
+      <PhaserContainer/>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import PhaserContainer from '@/components/PhaserContainer.vue';
 </script>
