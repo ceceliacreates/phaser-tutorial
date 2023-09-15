@@ -5,13 +5,8 @@
         <ion-title>Play</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Play</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <PhaserContainer/>
+    <ion-content >
+        <PhaserContainer />
     </ion-content>
   </ion-page>
 </template>
