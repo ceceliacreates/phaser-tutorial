@@ -61,5 +61,51 @@ export class PlayScene extends Scene {
         });
       }
   
-    }
+    // sets player physics
+     this.player.body.setGravityY(300);
+     this.player.setCollideWorldBounds(true);
+  
+     // adds collider between player and platforms
+     this.physics.add.collider(this.player, this.platform);
+  
+     // event handlers for arrow input
+     this.moveLeft = false;
+     this.moveRight = false;
+  
+     this.leftArrow.on('pointerdown', () => {
+     this.moveLeft = true;
+   });
+     this.leftArrow.on('pointerup', () => {
+     this.moveLeft = false;
+   });
+  
+     this.rightArrow.on('pointerdown', () => { 
+     this.moveRight = true;
+   });
+     this.rightArrow.on('pointerup', () => {
+     this.moveRight = false;
+   });
+  
+     }
+  
+     update () {
+       if (this.moveLeft && !this.moveRight) {
+         this.player.setVelocityX(0 - 200);
+     
+         this.player.anims.play('left', true);
+       }
+       else if (this.moveRight && !this.moveLeft) {
+         this.player.setVelocityX(200);
+     
+         this.player.anims.play('right', true);
+       }
+  
+       else
+       {
+           this.player.setVelocityX(0);
+       
+           this.player.anims.play('turn');
+       }
+  
+     }
   }
