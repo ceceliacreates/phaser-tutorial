@@ -27,8 +27,6 @@ export class PlayScene extends Scene {
     this.controlsAreaHeight = this.screenHeight * 0.2;
     this.gameAreaHeight = this.screenHeight - this.controlsAreaHeight;
 
-    console.log(this.gameAreaHeight, this.controlsAreaHeight, this.screenHeight)
-
     // adds the player, platform, and controls
     this.platform = this.physics.add.staticImage(0, this.gameAreaHeight, 'platform').setOrigin(0, 0).refreshBody();
     this.player = this.physics.add.sprite(this.screenCenterX, this.gameAreaHeight - 24, 'player');
@@ -124,6 +122,47 @@ export class PlayScene extends Scene {
       callbackScope: this,
       loop: true,
     });
+
+    // Adds colliders between stars and bombs with platform
+
+    this.physics.add.collider(this.stars, this.platform, function(object1, object2) {
+      const star = (object1.key === 'star') ? object1 : object2;
+      star.destroy();
+  });
+
+    this.physics.add.collider(this.bombs, this.platform, function(object1, object2) {
+      const bomb = (object1.key === 'bomb') ? object1 : object2;
+      bomb.destroy();
+    });
+
+  // Adds overlap between player and stars
+
+  this.score = 0;
+  this.scoreText = this.add.text(this.screenCenterX, this.gameAreaHeight + 16, 'Score: 0', { fontSize: '16px', fill: '#000' }).setOrigin(0.5, 0.5);
+
+  this.physics.add.overlap(this.player, this.stars, function(object1, object2) {
+    const star = (object1.key === 'player') ? object1 : object2;
+    star.destroy();
+    this.score += 10;
+    this.scoreText.setText('Score: ' + this.score);
+  }, null, this);
+
+  // Adds overlap between player and bombs
+
+  this.physics.add.overlap(this.player, this.bombs, function(object1, object2) {
+    const bomb = (object1.key === 'player') ? object1 : object2;
+    bomb.destroy();
+    createStarLoop.destroy();
+    createBombLoop.destroy();
+    this.physics.pause();
+
+    this.gameOverText = this.add.text(this.screenCenterX, this.screenHeight / 2, 'Game Over', { fontSize: '32px', fill: 'red' }).setOrigin(0.5, 0.5);
+
+    this.input.on('pointerup', () => {
+      this.score = 0;
+      this.scene.restart();
+    })
+  }, null, this);
   
   }
   
