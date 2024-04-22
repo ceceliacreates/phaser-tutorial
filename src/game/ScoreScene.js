@@ -28,5 +28,11 @@ export class ScoreScene extends Scene {
             repeat: -1 // Repeat forever
         })
 
+        // Add pointerdown handler to restart game
+        this.input.once('pointerdown', () => {
+            this.scene.stop('ScoreScene')
+            this.scene.start('PlayScene')
+        });
+
     }
   }
