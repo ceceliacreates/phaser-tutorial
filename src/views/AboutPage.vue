@@ -6,12 +6,11 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ExploreContainer name="About page" />
+      <h1>This is a game built with Phaser, Vue, Ionic, and Capacitor!</h1>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
 </script>

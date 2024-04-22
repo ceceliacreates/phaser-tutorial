@@ -160,6 +160,13 @@ export class PlayScene extends Scene {
     createBombLoop.destroy();
     this.physics.pause();
 
+    // When the game ends, dispatch the event with the score and rating
+    const gameEndEvent = new CustomEvent("gameEnded", {
+       detail: { score: this.score }
+    });
+      
+    window.dispatchEvent(gameEndEvent);
+
     // stops Play Scene and starts Score Scene
 
     this.scene.stop('PlayScene')
