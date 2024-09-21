@@ -141,7 +141,7 @@ export class PlayScene extends Scene {
   this.scoreText = this.add.text(this.screenCenterX, this.gameAreaHeight + 16, 'Score: 0', { fontSize: '16px', fill: '#000' }).setOrigin(0.5, 0.5);
 
   this.physics.add.overlap(this.player, this.stars, function(object1, object2) {
-    const star = (object1.key === 'player') ? object1 : object2;
+    const star = (object1.texture.key === 'star') ? object1 : object2;
     star.destroy();
     this.score += 10;
     this.scoreText.setText('Score: ' + this.score);
@@ -152,7 +152,7 @@ export class PlayScene extends Scene {
   this.physics.add.overlap(this.player, this.bombs, function(object1, object2) {
 
     // Destroys bomb that triggered overlap
-    const bomb = (object1.key === 'player') ? object1 : object2;
+    const bomb = (object1.texture.key === 'bomb') ? object1 : object2;
     bomb.destroy();
 
     // Stops game object generation, pauses physics, and resets score to zero
