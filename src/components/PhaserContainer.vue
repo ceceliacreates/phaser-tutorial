@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, inject } from 'vue'
 import { IonButton } from '@ionic/vue';
+// @ts-ignore
 import { launch } from '@/game/game.js';
 import { GameScoresProvider } from '@/types'
 
